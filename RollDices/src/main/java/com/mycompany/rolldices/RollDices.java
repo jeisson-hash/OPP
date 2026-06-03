@@ -18,6 +18,8 @@ public class RollDices {
     }
 
     public static void main(String[] args) {
+        
+        Scanner teclado = new Scanner(System.in);
 
         int vidas = 5;
 
@@ -30,49 +32,61 @@ public class RollDices {
 
         int igualesConsecutivos = 0;
 
-        System.out.println("----- THE DICES GAME -----");
-
+        System.out.println("================================================");
+        System.out.println("                 THE DICES GAME");
+        System.out.println("================================================");
+        System.out.println("                     RULES");
+        System.out.println("- You start with 5 lives");
+        System.out.println("- If the sum of the dice is odd, you lose a life");
+        System.out.println("- If you get double 6, you win a life");
+        System.out.println("- If you get 3 pairs in a row you win");
+        System.out.println("================================================");
+ 
+        
         while (vidas > 0) {
+            
+            System.out.println("\nPress ENTER to roll the dices");
+            teclado.nextLine();
 
             int dado1 = rollDice();
             int dado2 = rollDice();
 
             int suma = dado1 + dado2;
 
-            System.out.println("\nLanzamiento " + lanzamiento);
-            System.out.println("Dado 1: " + dado1);
-            System.out.println("Dado 2: " + dado2);
-            System.out.println("Suma: " + suma);
+            System.out.println("\nRoll " + lanzamiento);
+            System.out.println("Dice 1: " + dado1);
+            System.out.println("Dice 2: " + dado2);
+            System.out.println("Sum of the dices: " + suma);
 
             totalLanzamientos++;
 
-            // Validar si la suma es par o impar
+            // Valido si la suma es par o impar
             if (suma % 2 == 0) {
                 totalSumasPares++;
-                System.out.println("Suma PAR ¡Continuas jugando! :D ");
+                System.out.println("EVEN SUM !You continue playing! :D ");
             } else {
                 totalSumasImpares++;
                 vidas--;
-                System.out.println("Suma IMPAR ¡Pierdes una vida! D: ");
+                System.out.println("ODD SUM !You lose a life! D: ");
             }
 
-            // Si obtiene un par de 6 gana una vida
+            // Si se obtiene un par de 6 gana una vida
             if (dado1 == 6 && dado2 == 6) {
                 vidas++;
-                System.out.println("¡Doble 6! ¡Ganas una vida! ");
+                System.out.println("¡DOUBLE 6! ¡You win a life! ");
             }
 
-            // Validar dados iguales
+            // Valido los dados iguales
             if (dado1 == dado2) {
                 totalDadosIguales++;
                 igualesConsecutivos++;
 
                 System.out.println(
-                        "Dados iguales. Consecutivos: "
+                        "Equal dices. Consecutive: "
                                 + igualesConsecutivos);
 
                 if (igualesConsecutivos == 3) {
-                    System.out.println("\n***** ¡YOU WIN! *****");
+                    System.out.println("\n===== ¡YOU WIN! =====");
                     break;
                 }
 
@@ -80,10 +94,10 @@ public class RollDices {
                 igualesConsecutivos = 0;
             }
 
-            System.out.println("Vidas restantes: " + vidas);
+            System.out.println("Remaining lives: " + vidas);
 
             if (vidas == 0) {
-                System.out.println("\n***** GAME OVER *****");
+                System.out.println("\n====== GAME OVER ======");
                 break;
             }
 
@@ -91,17 +105,20 @@ public class RollDices {
         }
 
         // Informe final
-        System.out.println("\n----- INFORME FINAL -----");
-        System.out.println("Total lanzamientos: "
+        System.out.println("\n::::: FINAL REPORT :::::");
+        System.out.println("Total rolls: "
                 + totalLanzamientos);
 
-        System.out.println("Total sumas pares: "
+        System.out.println("Total even sums: "
                 + totalSumasPares);
 
-        System.out.println("Total sumas impares: "
+        System.out.println("Total odd sums: "
                 + totalSumasImpares);
 
-        System.out.println("Total dados iguales: "
+        System.out.println("Total equal dices: "
                 + totalDadosIguales);
+        
+        teclado.close();
     }
 }
+
